@@ -22,7 +22,7 @@ var stein = new Image();
 var figur = new Image();
 kachel.src = "./Tiles/dirt.png";
 stein.src = "stein.gif";
-figur.src = "./Charakter/Slime.png";
+figur.src = "./Charakter/slime.png";
 var offsetX = 400;
 var offsetY = 100;
 var canvas, context;
