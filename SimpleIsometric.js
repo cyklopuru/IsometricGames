@@ -33,16 +33,20 @@ function checkKey(e) {
     e = e || window.event;
 
     if (e.keyCode == '39') {
-        moveUp();
+        figur.src = "./Charakter/slime_back.png";
+		moveUp();
     }
     else if (e.keyCode == '37') {
-        moveDown();
+		figur.src = "./Charakter/slime_left.png";
+		moveDown();
     }
     else if (e.keyCode == '38') {
-       moveLeft();
+		figur.src =	"./Charakter/slime_back.png";  
+		moveLeft();
     }
     else if (e.keyCode == '40') {
-       moveRight();
+		figur.src = "./Charakter/slime_right.png";
+		moveRight();
     }
 
 }
