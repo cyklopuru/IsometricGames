@@ -4,7 +4,7 @@ var feld =
 	[
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 1, 0, 0, 0, 0, 0, 0, 0],
-		[0, 1, 1, 0, 0, 0, 0, 0, 0],
+		[0, 1, 1, 0, 0, 0, 1, 0, 0],
 		[0, 0, 0, 1, 0, 0, 0, 0, 0],
 		[0, 1, 1, 1, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -120,21 +120,15 @@ function zeichneFeld() {
 
 			switch (feld[i][j]) {
 				case 0:
-
 					context.drawImage(kachel, isoX, isoY, kachel.width, kachel.height);
-
 					break;
 				case 1:
-
 					isoY -= stein.height - kachel.height;
 					context.drawImage(stein, isoX, isoY, stein.width, stein.height);
-
 					break;
 				case 2:
-
 					isoY -= figur.height - kachel.height;
 					context.drawImage(figur, isoX, isoY, figur.width, figur.height);
-
 					break;
 
 				default:
