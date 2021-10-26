@@ -1,17 +1,17 @@
 document.onkeydown = checkKey;
 
-var feld = 
-[
-[0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 1, 0, 0, 0, 0, 0, 0, 0],
-[0, 1, 1, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 1, 0, 0, 0, 0, 0],
-[0, 1, 1, 1, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 1, 0, 0, 0, 0, 0, 0],
-[0, 1, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
+var feld =
+	[
+		[0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 1, 0, 0, 0, 0, 0, 0, 0],
+		[0, 1, 1, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 1, 0, 0, 0, 0, 0],
+		[0, 1, 1, 1, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 1, 0, 0, 0, 0, 0, 0],
+		[0, 1, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0]
+	];
 var figurX = 1;
 var figurY = 2;
 feld[figurY][figurX] = 2;
@@ -19,9 +19,9 @@ feld[figurY][figurX] = 2;
 var kachel = new Image();
 var stein = new Image();
 var figur = new Image();
-kachel.src = "./Tiles/dirt.png";
-stein.src = "stein.gif";
-figur.src = "./Charakter/slime.png";
+kachel.src = "./0.png";
+stein.src = "./1.png";
+figur.src = "./2.png";
 var offsetX = 400;
 var offsetY = 100;
 var canvas, context;
@@ -29,24 +29,24 @@ Simple2D.addEventListener('');
 
 function checkKey(e) {
 
-    e = e || window.event;
+	e = e || window.event;
 
-    if (e.keyCode == '39') {
-        figur.src = "./Charakter/slime_back.png";
+	if (e.keyCode == '39') {
+		//figur.src = "./Charakter/slime_back.png";
 		moveUp();
-    }
-    else if (e.keyCode == '37') {
-		figur.src = "./Charakter/slime_left.png";
+	}
+	else if (e.keyCode == '37') {
+		//figur.src = "./Charakter/slime_left.png";
 		moveDown();
-    }
-    else if (e.keyCode == '38') {
-		figur.src =	"./Charakter/slime_back.png";  
+	}
+	else if (e.keyCode == '38') {
+		//figur.src =	"./Charakter/slime_back.png";  
 		moveLeft();
-    }
-    else if (e.keyCode == '40') {
-		figur.src = "./Charakter/slime_right.png";
+	}
+	else if (e.keyCode == '40') {
+		//figur.src = "./Charakter/slime_right.png";
 		moveRight();
-    }
+	}
 
 }
 
@@ -57,14 +57,14 @@ function moveUp() {
 		feld[figurY][figurX] = 2;
 		zeichneFeld();
 	}
-	else if(feld[figurY - 1][figurX] == 1 && feld[figurY - 2][figurX] == 0) {
+	else if (feld[figurY - 1][figurX] == 1 && feld[figurY - 2][figurX] == 0) {
 		feld[figurY - 1][figurX] = 0;
 		feld[figurY - 2][figurX] = 1;
 		moveUp();
 	}
 }
 function moveDown() {
-	if (figurY < feld.length -1 && feld[figurY + 1][figurX] == 0) {
+	if (figurY < feld.length - 1 && feld[figurY + 1][figurX] == 0) {
 		feld[figurY][figurX] = 0;
 		figurY++;
 		feld[figurY][figurX] = 2;
@@ -90,7 +90,7 @@ function moveLeft() {
 	}
 }
 function moveRight() {
-	if (figurX < feld[0].length -1 && feld[figurY][figurX + 1] == 0) {
+	if (figurX < feld[0].length - 1 && feld[figurY][figurX + 1] == 0) {
 		feld[figurY][figurX] = 0;
 		figurX++;
 		feld[figurY][figurX] = 2;
@@ -109,28 +109,36 @@ function init() {
 	context = canvas.getContext("2d");
 }
 
-
 function zeichneFeld() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	for (let i = 0; i < feld.length; i++)
 		for (let j = 0; j < feld[i].length; j++) {
 			let x = j * kachel.height;
 			let y = i * kachel.height;
-			let isoX = x-y + offsetX; 
-			let isoY = (x+y)/2 + offsetY; 
-			if (feld[i][j] == 0)	//normale Kachel
-			{
-				context.drawImage(kachel, isoX, isoY, kachel.width, kachel.height);
-			}
-			if (feld[i][j] == 1) //Hindernis
-			{
-				isoY -= stein.height-kachel.height;
-				context.drawImage(stein, isoX, isoY, stein.width, stein.height);
-			}
-			if (feld[i][j] == 2) //Spielfigur
-			{
-				isoY -= figur.height-kachel.height;
-				context.drawImage(figur, isoX, isoY, figur.width, figur.height);
+			let isoX = x - y + offsetX;
+			let isoY = (x + y) / 2 + offsetY;
+
+			switch (feld[i][j]) {
+				case 0:
+
+					context.drawImage(kachel, isoX, isoY, kachel.width, kachel.height);
+
+					break;
+				case 1:
+
+					isoY -= stein.height - kachel.height;
+					context.drawImage(stein, isoX, isoY, stein.width, stein.height);
+
+					break;
+				case 2:
+
+					isoY -= figur.height - kachel.height;
+					context.drawImage(figur, isoX, isoY, figur.width, figur.height);
+
+					break;
+
+				default:
+					break;
 			}
 		}
 }
