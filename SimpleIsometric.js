@@ -2,20 +2,20 @@ document.onkeydown = checkKey;
 
 var feld =
 	[
+		[1, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 1, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 1, 0, 0, 0, 0, 0, 0, 0],
-		[0, 1, 1, 0, 0, 0, 1, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 1, 0, 0, 0, 0, 0],
-		[0, 1, 1, 1, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 1, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 1, 0, 0, 0, 0, 0, 0],
-		[0, 1, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0]
 	];
 var figurX = 1;
 var figurY = 2;
 feld[figurY][figurX] = 2;
-
+var item;
 var kachel = new Image();
 var stein = new Image();
 var figur = new Image();
@@ -103,7 +103,17 @@ function moveRight() {
 	}
 }
 
-
+function resize(newRows, newCols) {
+	newRows = newRows + feld.length-1;
+	newCols = newCols + feld.length-1;
+	for (var i = 0; i < newRows; i++) {
+		item = feld[i] || (feld[i] = []);
+	
+		for (var k = item.length; k < newCols; k++)
+			item[k] = 0;    
+	}
+	zeichneFeld();
+}
 function init() {
 	canvas = document.getElementById("spielfeld");
 	context = canvas.getContext("2d");
