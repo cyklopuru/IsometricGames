@@ -121,8 +121,8 @@ function init() {
 
 function zeichneFeld() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	for (let i = 0; i < feld.length; i++)
-		for (let j = 0; j < feld[i].length; j++) {
+	for (let i = 0; i < 10; i++)
+		for (let j = 0; j < 10; j++) {
 			let x = j * kachel.height;
 			let y = i * kachel.height;
 			let isoX = x - y + offsetX;
