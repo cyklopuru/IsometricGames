@@ -2,7 +2,7 @@ document.onkeydown = checkKey;
 
 var feld =
 	[
-		[1, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 1, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -12,6 +12,10 @@ var feld =
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0]
 	];
+var textureOffsetX = 191;
+var textureOffsetY = 287;
+var textureHeight = 65;
+var textureLength = 130;
 var figurX = 1;
 var figurY = 2;
 feld[figurY][figurX] = 2;
@@ -19,8 +23,8 @@ var item;
 var kachel = new Image();
 var stein = new Image();
 var figur = new Image();
-kachel.src = "./Assets/IsometricTRPGAssetPack/Layer 1_Isometric tiles030.png";
-stein.src = "./Assets/IsometricTRPGAssetPack/Layer 1_Isometric tiles035.png";
+kachel.src = "./Assets/kenney_natureKit_2.1/Isometric/ground_pathOpen_SE.png";
+stein.src = "./Assets/kenney_natureKit_2.1/Isometric/cliff_block_stone_NW.png";
 figur.src = "./2.png";
 var offsetX = 400;
 var offsetY = 100;
@@ -123,27 +127,32 @@ function zeichneFeld() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	for (let i = 0; i < 10; i++)
 		for (let j = 0; j < 10; j++) {
-			let x = j * kachel.height;
-			let y = i * kachel.height;
+			let x = j * 65;
+			let y = i * 65;
 			let isoX = x - y + offsetX;
 			let isoY = (x + y) / 2 + offsetY;
 
 			switch (feld[i][j]) {
 				case 0:
-					context.drawImage(kachel, isoX, isoY, kachel.width, kachel.height);
+					context.drawImage(kachel, 191, 287, 130, 65, isoX, isoY, 130, 65);
 					break;
 				case 1:
 					isoY -= stein.height - kachel.height;
-					context.drawImage(stein, isoX, isoY, stein.width, stein.height);
+					context.drawImage(stein, 191, 287, 130, 65, isoX, isoY, 130, 65);
 					break;
 				case 2:
 					isoY -= figur.height - kachel.height;
-					context.drawImage(figur, isoX, isoY, figur.width, figur.height);
+					context.drawImage(figur, offsetX,offsetY, figur.width, figur.height);
 					break;
 
 				default:
 					break;
 			}
 		}
+	update();
+	setTimeout(zeichneFeld, 10); 
+}
+function update() {
+	counter++;
 }
 
