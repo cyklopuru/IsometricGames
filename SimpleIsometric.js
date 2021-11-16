@@ -16,8 +16,8 @@ var textureOffsetX = 191;
 var textureOffsetY = 287;
 var textureHeight = 65;
 var textureLength = 130;
-var figurX = 1;
-var figurY = 2;
+var figurX = 0;
+var figurY = 0;
 feld[figurY][figurX] = 2;
 var item;
 var kachel = new Image();
@@ -134,15 +134,16 @@ function zeichneFeld() {
 
 			switch (feld[i][j]) {
 				case 0:
-					context.drawImage(kachel, 191, 287, 130, 65, isoX, isoY, 130, 65);
+					context.drawImage(kachel, textureOffsetX, textureOffsetY, 130, 65, isoX, isoY, 130, 65);
 					break;
 				case 1:
 					isoY -= stein.height - kachel.height;
-					context.drawImage(stein, 191, 287, 130, 65, isoX, isoY, 130, 65);
+					context.drawImage(stein, textureOffsetX, textureOffsetY, 130, 65, isoX, isoY, 130, 65);
 					break;
 				case 2:
-					isoY -= figur.height - kachel.height;
-					context.drawImage(figur, offsetX,offsetY, figur.width, figur.height);
+					/* isoY -= figur.height - kachel.height; */
+					context.drawImage(kachel, textureOffsetX, textureOffsetY, 130, 65, isoX, isoY, 130, 65);
+					context.drawImage(figur, 0, 0, 124, 124, isoX, isoY-65, 124, 124);
 					break;
 
 				default:
