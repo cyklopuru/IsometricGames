@@ -2,6 +2,7 @@ document.onkeydown = checkKey;
 
 var feld =
 	[
+<<<<<<< HEAD
 		[1, 1, 1, 1, 1, 1, 1, 1, 1],
 		[1, 1, 1, 1, 1, 1, 1, 1, 1],
 		[1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -17,13 +18,31 @@ var feld =
 	];
 var figurX = 6;
 var figurY = 6;
+=======
+		[0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 1, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 1, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 1, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0]
+	];
+var textureOffsetX = 191;
+var textureOffsetY = 287;
+var textureHeight = 65;
+var textureLength = 130;
+var figurX = 0;
+var figurY = 0;
+>>>>>>> b51191014cdd2ca91faabbf17e6289ee7b73f320
 feld[figurY][figurX] = 2;
 var item;
 var kachel = new Image();
 var stein = new Image();
 var figur = new Image();
-kachel.src = "./0.png";
-stein.src = "./1.png";
+kachel.src = "./Assets/kenney_natureKit_2.1/Isometric/ground_pathOpen_SE.png";
+stein.src = "./Assets/kenney_natureKit_2.1/Isometric/cliff_block_stone_NW.png";
 figur.src = "./2.png";
 var offsetX = 400;
 var offsetY = 100;
@@ -135,25 +154,32 @@ function zeichneFeld() {
 		for (let j = figurX - 5; j < figurX + 5; j++) {
 			let x = j * kachel.height;
 			let y = i * kachel.height;
+
 			let isoX = x - y + offsetX;
 			let isoY = (x + y) / 2 + offsetY;
 
 			switch (feld[i][j]) {
 				case 0:
-					context.drawImage(kachel, isoX, isoY, kachel.width, kachel.height);
+					context.drawImage(kachel, textureOffsetX, textureOffsetY, 130, 65, isoX, isoY, 130, 65);
 					break;
 				case 1:
 					isoY -= stein.height - kachel.height;
-					context.drawImage(stein, isoX, isoY, stein.width, stein.height);
+					context.drawImage(stein, textureOffsetX, textureOffsetY, 130, 65, isoX, isoY, 130, 65);
 					break;
 				case 2:
-					isoY -= figur.height - kachel.height;
-					context.drawImage(figur, isoX, isoY, figur.width, figur.height);
+					/* isoY -= figur.height - kachel.height; */
+					context.drawImage(kachel, textureOffsetX, textureOffsetY, 130, 65, isoX, isoY, 130, 65);
+					context.drawImage(figur, 0, 0, 124, 124, isoX, isoY-65, 124, 124);
 					break;
 
 				default:
 					break;
 			}
 		}
+	update();
+	setTimeout(zeichneFeld, 10); 
+}
+function update() {
+	counter++;
 }
 
