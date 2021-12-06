@@ -2,7 +2,6 @@ document.onkeydown = checkKey;
 
 var feld =
 	[
-<<<<<<< HEAD
 		[1, 1, 1, 1, 1, 1, 1, 1, 1],
 		[1, 1, 1, 1, 1, 1, 1, 1, 1],
 		[1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -18,24 +17,7 @@ var feld =
 	];
 var figurX = 6;
 var figurY = 6;
-=======
-		[0, 0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 1, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 1, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 1, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0, 0]
-	];
-var textureOffsetX = 191;
-var textureOffsetY = 287;
-var textureHeight = 65;
-var textureLength = 130;
-var figurX = 0;
-var figurY = 0;
->>>>>>> b51191014cdd2ca91faabbf17e6289ee7b73f320
+
 feld[figurY][figurX] = 2;
 var item;
 var kachel = new Image();
