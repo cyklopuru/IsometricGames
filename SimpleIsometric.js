@@ -2,18 +2,21 @@ document.onkeydown = checkKey;
 
 var feld =
 	[
-		[1, 0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 1, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 1, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 1, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0, 0]
+		[1, 1, 1, 1, 1, 1, 1, 1, 1],
+		[1, 1, 1, 1, 1, 1, 1, 1, 1],
+		[1, 1, 1, 1, 1, 1, 1, 1, 1],
+		[1, 1, 1, 1, 1, 1, 1, 1, 1],
+		[1, 1, 1, 1, 1, 1, 1, 1, 1],
+		[1, 1, 1, 1, 1, 0, 0, 0, 0],
+		[1, 1, 1, 1, 1, 0, 0, 0, 0],
+		[1, 1, 1, 1, 1, 0, 0, 0, 0],
+		[1, 1, 1, 1, 1, 0, 0, 0, 0],
+		[1, 1, 1, 1, 1, 0, 0, 0, 0],
+		[1, 1, 1, 1, 1, 0, 0, 0, 0]
+
 	];
-var figurX = 1;
-var figurY = 2;
+var figurX = 6;
+var figurY = 6;
 feld[figurY][figurX] = 2;
 var item;
 var kachel = new Image();
@@ -49,6 +52,12 @@ function checkKey(e) {
 	}
 
 }
+function offsetCheck() {
+	if(figurX && figurY > 5 && figurX && figurY < feld.length -5 ){
+		return true;
+	}
+	return false;
+}
 
 function moveUp() {
 	if (figurY > 0 && feld[figurY - 1][figurX] == 0) {
@@ -62,6 +71,7 @@ function moveUp() {
 		feld[figurY - 2][figurX] = 1;
 		moveUp();
 	}
+	
 }
 function moveDown() {
 	if (figurY < feld.length - 1 && feld[figurY + 1][figurX] == 0) {
@@ -121,8 +131,8 @@ function init() {
 
 function zeichneFeld() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	for (let i = 0; i < 10; i++)
-		for (let j = 0; j < 10; j++) {
+	for (var i = figurY - 5; i < figurY + 5; i++)
+		for (let j = figurX - 5; j < figurX + 5; j++) {
 			let x = j * kachel.height;
 			let y = i * kachel.height;
 			let isoX = x - y + offsetX;
