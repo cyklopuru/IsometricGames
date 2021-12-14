@@ -56,7 +56,6 @@ function offsetCheck() {
 }
 
 function moveUp() {
-<<<<<<< HEAD
   if (figurY > 0 && feld[figurY - 1][figurX] == 0) {
     feld[figurY][figurX] = 0;
     figurY--; //bewege die Figur ein Feld nach oben
@@ -67,20 +66,6 @@ function moveUp() {
     feld[figurY - 2][figurX] = 1;
     moveUp();
   }
-=======
-	if (figurY > 0 && feld[figurY - 1][figurX] == 0) {
-		feld[figurY][figurX] = 0;
-		figurY--; //bewege die Figur ein Feld nach oben
-		feld[figurY][figurX] = 2;
-		zeichneFeld();
-	}
-	else if (feld[figurY - 1][figurX] == 1 && feld[figurY - 2][figurX] == 0) {
-		feld[figurY - 1][figurX] = 0;
-		feld[figurY - 2][figurX] = 1;
-		moveUp();
-	}
-	
->>>>>>> d7c8d3b3a15a288e8422dbfc4dc20f770a511bad
 }
 function moveDown() {
   if (figurY < feld.length - 1 && feld[figurY + 1][figurX] == 0) {
@@ -147,16 +132,6 @@ function zeichneFeld() {
       let y = i * 65;
       let isoX = x - y + offsetX;
       let isoY = (x + y) / 2 + offsetY;
-=======
-	context.clearRect(0, 0, canvas.width, canvas.height);
-	for (var i = figurY - 5; i < figurY + 5; i++)
-		for (let j = figurX - 5; j < figurX + 5; j++) {
-			let x = j * kachel.height;
-			let y = i * kachel.height;
-
-			let isoX = x - y + offsetX;
-			let isoY = (x + y) / 2 + offsetY;
->>>>>>> d7c8d3b3a15a288e8422dbfc4dc20f770a511bad
 
       switch (feld[i][j]) {
         case 0:
