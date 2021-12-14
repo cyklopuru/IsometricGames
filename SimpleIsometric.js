@@ -124,7 +124,6 @@ function init() {
 }
 
 function zeichneFeld() {
-<<<<<<< HEAD
   context.clearRect(0, 0, canvas.width, canvas.height);
   for (let i = figurY - 5; i < figurY + 6; i++)
     for (let j = figurX - 5; j < figurX + 6; j++) {
