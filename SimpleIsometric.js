@@ -109,12 +109,7 @@ function resize(newRows, newCols) {
   newCols = newCols + feld.length - 1;
   for (var i = 0; i < newRows; i++) {
     item = feld[i] || (feld[i] = []);
-
-    if (figurX < 4 || figurY < 4) {
-      for (var k = item.length; k < newCols; k++) item[k] = 1;
-    } else {
-      for (var k = item.length; k < newCols; k++) item[k] = 0;
-    }
+    for (var k = item.length; k < newCols; k++) item[k] = Math.floor(Math.random() * 1);
   }
   zeichneFeld();
 }
@@ -127,6 +122,10 @@ function zeichneFeld() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   for (let i = figurY - 5; i < figurY + 6; i++)
     for (let j = figurX - 5; j < figurX + 6; j++) {
+      if(i<0) i= 0;
+      
+      if(j<0)  j = 0;
+      
       let x = j * 65;
       let y = i * 65;
       let isoX = x - y + offsetX;
