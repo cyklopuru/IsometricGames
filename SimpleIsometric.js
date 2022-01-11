@@ -6,8 +6,8 @@ var feld = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 1, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 1, 0, 0],
+  [0, 0, 0, 1, 0, 0, 1, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
@@ -17,12 +17,17 @@ var textureHeight = 65;
 var textureLength = 130;
 var figurX = 6;
 var figurY = 6;
+var gegnerX = 3;
+var gegnerY = 4;
 
 feld[figurY][figurX] = 2;
+feld[gegnerY][gegnerX] = 3;
 var item;
 var kachel = new Image();
 var stein = new Image();
 var figur = new Image();
+var gegner = new Image();
+gegner.src = "./Charakter/slime_right.png";
 kachel.src = "./Assets/kenney_natureKit_2.1/Isometric/ground_pathOpen_SE.png";
 stein.src = "./Assets/kenney_natureKit_2.1/Isometric/cliff_block_stone_NW.png";
 figur.src = "./2.png";
@@ -49,12 +54,38 @@ function checkKey(e) {
   }
 }
 function offsetCheck() {
-	if(figurX && figurY > 5 && figurX && figurY < feld.length -5 ){
-		return true;
-	}
-	return false;
+  if (figurX && figurY > 5 && figurX && figurY < feld.length - 5) {
+    return true;
+  }
+  return false;
+}
+/* Geht alle richtungen ab und checkt ob es den Kurs korrigieren muss */
+function pathfinding() {
+  if (gegnerX < figurX) {
+    feld[gegnerY][gegnerX] = 0;
+    gegnerX++;
+    feld[gegnerY][gegnerX] = 3;
+  }
+  if (gegnerX > figurX) {
+    feld[gegnerY][gegnerX] = 0;
+    gegnerX--;
+    feld[gegnerY][gegnerX] = 3;
+  }
+  if (gegnerY < figurY) {
+    feld[gegnerY][gegnerX] = 0;
+    gegnerY++;
+    feld[gegnerY][gegnerX] = 3;
+  }
+  if (gegnerY > figurY) {
+    feld[gegnerY][gegnerX] = 0;
+    gegnerY--;
+    feld[gegnerY][gegnerX] = 3;
+  }
 }
 
+function bewegeGegner() {
+  pathfinding();
+}
 function moveUp() {
   if (figurY > 0 && feld[figurY - 1][figurX] == 0) {
     feld[figurY][figurX] = 0;
@@ -96,6 +127,7 @@ function moveRight() {
     feld[figurY][figurX] = 0;
     figurX++;
     feld[figurY][figurX] = 2;
+    pathfinding();
     zeichneFeld();
   } else if (feld[figurY][figurX + 1] == 1 && feld[figurY][figurX + 2] == 0) {
     feld[figurY][figurX + 1] = 0;
@@ -109,7 +141,8 @@ function resize(newRows, newCols) {
   newCols = newCols + feld.length - 1;
   for (var i = 0; i < newRows; i++) {
     item = feld[i] || (feld[i] = []);
-    for (var k = item.length; k < newCols; k++) item[k] = Math.floor(Math.random() * 1);
+    for (var k = item.length; k < newCols; k++)
+      item[k] = Math.floor(Math.random() * 1);
   }
   zeichneFeld();
 }
@@ -122,10 +155,10 @@ function zeichneFeld() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   for (let i = figurY - 5; i < figurY + 6; i++)
     for (let j = figurX - 5; j < figurX + 6; j++) {
-      if(i<0) i= 0;
-      
-      if(j<0)  j = 0;
-      
+      if (i < 0) i = 0;
+
+      if (j < 0) j = 0;
+
       let x = j * 65;
       let y = i * 65;
       let isoX = x - y + offsetX;
@@ -174,12 +207,35 @@ function zeichneFeld() {
           );
           context.drawImage(figur, 0, 0, 124, 124, isoX, isoY - 65, 124, 124);
           break;
-
+        case 3:
+          context.drawImage(
+            kachel,
+            textureOffsetX,
+            textureOffsetY,
+            130,
+            65,
+            isoX,
+            isoY,
+            130,
+            65
+          );
+          context.drawImage(
+            gegner,
+            0,
+            0,
+            124,
+            124,
+            isoX + 10,
+            isoY - 45,
+            124,
+            124
+          );
         default:
           break;
       }
     }
   update();
+  setTimeout(pathfinding, 1000);
   setTimeout(zeichneFeld, 10);
 }
 function update() {
